@@ -1,0 +1,48 @@
+TP Final Lenguajes 1
+
+Notebook (.ipynb) con:
+
+○ Lectura y descripción del dataset.
+○ Limpieza y preparación (tratamiento de nulos, tipos, fechas).
+○ Análisis exploratorio (EDA) con gráficos y estadísticas.
+○ Respuestas a las preguntas de análisis (ver 5).
+○ Comentarios y conclusiones parciales en cada sección.
+○ Generación de archivos .csv o .json con resultados resumidos para la
+API.
+
+Mini-API local (obligatoria):
+
+Como cierre integrador, el equipo deberá exponer al menos dos endpoints
+(por ejemplo, /top_generos, /roi_por_pais) utilizando FastAPI o Flask, que
+devuelvan en formato JSON los resultados principales del análisis.
+○ Puede servirse desde un script simple (app.py).
+○ Debe documentarse en el README con instrucciones de ejecución.
+○ No se requiere despliegue online, solo ejecución local.
+
+Los equipos deberán elegir al menos tres de los siguientes ejes y desarrollar análisis
+descriptivos con tablas y gráficos (matplotlib o seaborn):
+    1. Rentabilidad (ROI) por género o país.
+        ○ ROI = revenue / budget
+        ○ Analizar distribución y valores promedio por grupo.
+    2. Relación entre presupuesto y rating.
+        ○ Correlaciones (Pearson, Spearman) y dispersogramas.
+    3. Evolución de la duración de películas en los últimos 50 años.
+        ○ Promedio o mediana de runtime por década.
+    4. Directores con mejor rating promedio.
+        ○ Filtrar por cantidad mínima de películas y analizar promedios.
+    5. Actores que aparecen juntos más frecuentemente.
+        ○ Construir una red básica de co-actuación (pueden usar networkx o
+    análisis de pares).
+    6. Distribución del rating por idioma o país de producción.
+    Cada análisis debe acompañarse con interpretación textual (no solo gráficos).
+
+Recomendaciones técnicas
+
+● Librerías sugeridas: pandas, numpy, matplotlib, seaborn, networkx, flask o
+fastapi.
+● Se puede usar jupyter nbconvert o pdfkit para generar el PDF.
+● Evitar el uso de machine learning o modelos predictivos: enfocarse en
+estadística descriptiva.
+● Documentar decisiones de limpieza, filtros y conversiones.
+● Mantener código reproducible: celdas limpias, rutas relativas, funciones
+auxiliares si es necesario.
