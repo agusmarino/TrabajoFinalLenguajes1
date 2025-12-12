@@ -1,12 +1,14 @@
 from fastapi import FastAPI
 from typing import List, Dict
+from fastapi.encoders import jsonable_encoder
+from fastapi.responses import JSONResponse
 import pandas as pd
 import numpy as np
 import ast
 
 app = FastAPI(
-    title = "Mini API - Análisis TMDB",
-    description = "API local para exponer análisis descriptivos de películas (TMDB).",
+    title = "Mini API - Análisis ",
+    description = "API local para exponer análisis descriptivos de películas.",
     version = "1.0.0"
 )
 
@@ -20,6 +22,24 @@ def parse_list_column(s):
         return ast.literal_eval(s) if isinstance(s, str) else []
     except Exception:
         return []
+
+def _clean_nans(obj):
+    """Reemplaza NaN/inf por None de forma recursiva (para JSON válido)."""
+    if isinstance(obj, dict):
+        return {k: _clean_nans(v) for k, v in obj.items()}
+    if isinstance(obj, list):
+        return [_clean_nans(v) for v in obj]
+    try:
+        if isinstance(obj, (float, np.floating)) and (np.isnan(obj) or np.isinf(obj)):
+            return None
+    except Exception:
+        pass
+    return obj
+
+def as_json(payload):
+    """Devuelve respuesta JSON garantizando serialización correcta."""
+    payload = _clean_nans(payload)
+    return JSONResponse(content=jsonable_encoder(payload))
 
 # Cargar datasets
 movies = pd.read_csv("tmdb_5000_movies_limpia.csv")
@@ -149,7 +169,7 @@ def roi_por_genero(top_n: int = 10):
     Parámetro: top_n (por defecto 10).
     """
     df = genre_stats.head(top_n)
-    return df.to_dict(orient="records")
+    return as_json(df.to_dict(orient="records"))
 
 
 @app.get("/roi_por_pais")
@@ -163,7 +183,7 @@ def roi_por_pais(min_peliculas: int = 30, top_n: int = 10):
         country_stats[country_stats["count"] >= min_peliculas]
         .head(top_n)
     )
-    return df.to_dict(orient="records")
+    return as_json(df.to_dict(orient="records"))
 
 
 @app.get("/top_directores")
@@ -177,7 +197,7 @@ def top_directores(min_peliculas: int = 4, top_n: int = 10):
         dir_stats[dir_stats["count"] >= min_peliculas]
         .head(top_n)
     )
-    return df.to_dict(orient="records")
+    return as_json(df.to_dict(orient="records"))
 
 
 @app.get("/correlacion_presupuesto_rating")
@@ -186,4 +206,4 @@ def correlacion_presupuesto_rating():
     Devuelve las correlaciones entre presupuesto y rating.
     Incluye presupuesto lineal y log10(presupuesto).
     """
-    return correlaciones_presupuesto_rating
+    return as_json(correlaciones_presupuesto_rating)
