@@ -158,7 +158,6 @@ def root():
             "/roi_por_pais",
             "/top_directores",
             "/correlacion_presupuesto_rating",
-            "/docs  (documentación interactiva)"
         ]
     }
 
