@@ -45,7 +45,7 @@ def as_json(payload):
 movies = pd.read_csv("tmdb_5000_movies_limpia.csv")
 credits = pd.read_csv("tmdb_5000_credits.csv")
 
-# Parseo de columnas JSON-like
+# Parseo de columnas JSON
 movies["genres_parsed"] = movies["genres"].apply(parse_list_column)
 movies["countries_parsed"] = movies["production_countries"].apply(parse_list_column)
 credits["crew_parsed"] = credits["crew"].apply(parse_list_column)
@@ -152,13 +152,12 @@ dir_stats = (
 @app.get("/")
 def root():
     return {
-        "mensaje": "Mini API TMDB funcionando",
+        "mensaje": "Mini API funcionando",
         "endpoints": [
             "/roi_por_genero",
             "/roi_por_pais",
             "/top_directores",
             "/correlacion_presupuesto_rating",
-            "/docs  (documentación interactiva)"
         ]
     }
 

@@ -1,17 +1,49 @@
-TP Final Lenguajes 1
+Trabajo Final Lenguajes - 2025
 
-# Mini API local - Análisis TMDB
+Este proyecto realiza un análisis descriptivo de datos cinematográficos utilizando datasets públicos de The Movie Database obtenidos de Kaggle.
+El trabajo incluye un Jupyter Notebook en el que realizamos un análisis exploratorio de datos donde se lleva a cabo la lectura, limpieza y análisis de la informacion según los siguientes ejes:
+ - Rentabilidad (ROI) por género
+ - Relación entre presupuesto y rating
+ - Evolución de la duración películas en los últimos 50 años.
 
-Este proyecto implementa una mini API local usando **FastAPI** que expone los resultados principales del análisis descriptivo hecho
-sobre los datasets de TMDB (`tmdb_5000_movies_limpia.csv` y `tmdb_5000_credits.csv`).
+ También realizamos una mini-API local con FastAPI que expone en formato JSON los principales resultados del análisis, permitiendo su consulta de forma estructurada y reutilizable.
 
-Requisitos
+Instrucciones para la ejecución de la API
 
-- Python 3.9+ (recomendado)
-- Paquetes:
-    - fastapi
-    - uvicorn
-    - pandas
-    - numpy
-    - matplotlib
-    - seaborn
+1. Requisitos
+    - Python 3.9 o superior
+    - Paquetes necesarios (requirements.txt)
+
+    pip install -r requirements.txt
+
+2. Archivos necesarios
+    - Se incluyen en la carpeta nuevosDatasets todos los archivos necesarios:
+        - app.py (archivo principal de la API)
+        - tmdb_5000_movies_limpia.csv
+        - tmdb_5000_credits.csv
+
+3. Crear y activar un entorno virtual
+    - macOS/Linux
+
+        python3 -m venv .venv
+        source .venv/bin/activate
+        pip install -r requirements.txt
+
+    - Windows (PowerShell)
+
+        py -m venv .venv
+        .\.venv\Scripts\Activate.ps1
+        pip install -r requirements.txt
+
+4. Ejecutar la API
+    - Desde la carpeta nuevosDatasets, ejecutar:
+
+        uvicorn app:app --reload
+
+    - Si la ejecución es correcta, la API quedara disponible en:
+
+        http://127.0.0.1:8000
+
+
+
+
