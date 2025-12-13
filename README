@@ -1,5 +1,7 @@
 Trabajo Final Lenguajes - 2025
 
+Video explicacion: https://www.youtube.com/watch?v=z4boHWYjHiU
+
 Este proyecto realiza un análisis descriptivo de datos cinematográficos utilizando datasets públicos de The Movie Database obtenidos de Kaggle.
 El trabajo incluye un Jupyter Notebook en el que realizamos un análisis exploratorio de datos donde se lleva a cabo la lectura, limpieza y análisis de la informacion según los siguientes ejes:
  - Rentabilidad (ROI) por género
